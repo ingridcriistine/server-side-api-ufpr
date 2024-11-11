@@ -45,8 +45,25 @@ class ContactRepository {
         }
     }
 
-    update() {
-
+    async update({id, name, email, phone, category_id}) {
+        const result = await db.query(
+            `UPDATE TABLE contacts SET
+            name = ?, 
+            email = ?, 
+            phone = ?, 
+            category_id = ?
+            WHERE id = ?;`,
+            [name, email, phone, category_id, id]
+        )
+        //retornar o id
+        const updatedId = result.update
+        return{
+            id: updatedId,
+            name,
+            email,
+            phone,
+            category_id
+        }
     }
 
     async delete(id) {

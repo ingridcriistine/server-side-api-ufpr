@@ -49,12 +49,14 @@ class ContactController {
         response.status(200).json(contact);
     }
 
-    async update() {
+    async update(request, response) {
         //atualizar um registro
-        const contact = await ContactRepository.update(id);
+        const {id} = request.params;
+        const {name, email, phone, category_id} = request.body;
+        const contact = await ContactRepository.update(id, name, email, phone, category_id);
         
         //verificar se o id enviado na requisição existe
-        if(!contact) {
+        if(!{id}) {
             return response.status(404).json({error: "Contact not found!"});
         }
         
