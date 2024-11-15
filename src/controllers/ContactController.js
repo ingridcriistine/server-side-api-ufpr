@@ -53,7 +53,7 @@ class ContactController {
         //atualizar um registro
         const {id} = request.params;
         const {name, email, phone, category_id} = request.body;
-        const contact = await ContactRepository.update(id, name, email, phone, category_id);
+        const contact = await ContactRepository.update({id, name, email, phone, category_id});
         
         //verificar se o id enviado na requisição existe
         if(!{id}) {
